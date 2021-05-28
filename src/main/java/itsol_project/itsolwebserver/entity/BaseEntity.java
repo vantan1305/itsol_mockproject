@@ -18,4 +18,5 @@ public abstract class BaseEntity {
     private Date updatedDate;
     public BaseEntity() {
     }
+
 }

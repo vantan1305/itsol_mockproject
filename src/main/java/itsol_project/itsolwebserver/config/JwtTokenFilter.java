@@ -1,5 +1,7 @@
 package itsol_project.itsolwebserver.config;
 
+import itsol_project.itsolwebserver.service.iservice.UserService;
+import itsol_project.itsolwebserver.util.AppUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +19,8 @@ import java.io.IOException;
 
 public class JwtTokenFilter extends OncePerRequestFilter {
     private static final Logger logger = LoggerFactory.getLogger(JwtTokenFilter.class);
-//    @Autowired
-//    private UserService userService;
+    @Autowired
+    private UserService userService;
     @Autowired
     private JwtConfig jwtConfig;
 
@@ -31,16 +33,17 @@ public class JwtTokenFilter extends OncePerRequestFilter {
      * @throws IOException
      */
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
+            throws ServletException, IOException {
         try {
-//            String jwt = AppUtil.getJwt(request, jwtConfig);
-//            if (jwt != null && jwtConfig.validationToken(jwt)) {
-//                String username = jwtConfig.getUsernameFromJwtToken(jwt);
-//                UserDetails userDetails = userService.loadUserByUsername(username);
-//                UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
-//                authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-//                SecurityContextHolder.getContext().setAuthentication(authentication);
-//            }
+            String jwt = AppUtil.getJwt(request, jwtConfig);
+            if (jwt != null && jwtConfig.validationToken(jwt)) {
+                String username = jwtConfig.getUsernameFromJwtToken(jwt);
+                UserDetails userDetails = userService.loadUserByUsername(username);
+                UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
+                authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+                SecurityContextHolder.getContext().setAuthentication(authentication);
+            }
         }catch (Exception e){
             logger.error(e.getMessage());
         }

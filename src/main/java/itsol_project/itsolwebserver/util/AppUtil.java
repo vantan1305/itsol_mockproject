@@ -1,5 +1,7 @@
 package itsol_project.itsolwebserver.util;
 
+import itsol_project.itsolwebserver.config.JwtConfig;
+import itsol_project.itsolwebserver.dto.ProductDto;
 import org.modelmapper.ModelMapper;
 
 import javax.servlet.http.HttpServletRequest;
@@ -59,4 +61,7 @@ public class AppUtil {
         return sb.toString();
     }
 
+    public static String getJwt(HttpServletRequest request, JwtConfig jwtConfig) {
+        return null;
+    }
 }

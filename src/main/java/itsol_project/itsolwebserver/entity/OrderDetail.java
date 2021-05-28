@@ -15,7 +15,10 @@ import javax.persistence.Table;
 public class OrderDetail extends BaseEntity{
     @ManyToOne
     private Order order;
-//    @ManyToOne
-//    private ProductInfo productInfo;
-//    private Long numberProduct;
+    @ManyToOne
+    private ProductInfo productInfo;
+    private Long numberProduct;
+
+    public OrderDetail() {
+    }
 }

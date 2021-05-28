@@ -20,16 +20,17 @@ public class Product extends BaseEntity{
     private String status;
     private String mieuTa;
 
-
     @OneToMany(mappedBy = "product")
     private List<ProductInfo> productInfoList;
 
     @ManyToOne
-    private ProductType productType; // loại sản phẩm \
+    private ProductType productType;
+    // loại sản phẩm
     // ở đây là 1 object, khi truy vấn = jpa sẽ nhận đc toàn bộ giá trị theo khóa này
 
     @ManyToOne
-    private ProductCompany productCompany; //hãng
+    private Brand brand;
+    //Hãng
 
     public Product(){}
 }

@@ -28,6 +28,8 @@ public class User extends BaseEntity implements UserDetails {
     private String username;
     @Column(nullable = false)
     private String password;
+    @Column(columnDefinition = "boolean default false")
+    private Boolean isAdminAccount; // loại tài khoản: ADMIN: true || CLIENT: false, bạn sửa đi, cả tôi sợ sai vcl
     public User() {}
 
     @Override
@@ -36,32 +38,23 @@ public class User extends BaseEntity implements UserDetails {
     }
 
     @Override
-    public String getPassword() {
-        return null;
-    }
-
-    @Override
-    public String getUsername() {
-        return null;
-    }
-
-    @Override
     public boolean isAccountNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return true;
     }
+
 }
